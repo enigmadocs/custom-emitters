@@ -27,6 +27,9 @@ extract:
     action: emitters.jsonReadRecords
     source: "menu"
 
+  - step:
+    action: debug.LogValues
+
 transform:
   - step: 3. Set schema for output table
     action: transform.schema.SetSchema
@@ -34,7 +37,7 @@ transform:
       - name: station_name
         type: string
       - name: available_bikes
-        type: integer
+        type: string
 
 load:
   - step: 4. Output to local CSV file
