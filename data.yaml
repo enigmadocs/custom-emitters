@@ -1,38 +1,42 @@
 dependencies:
   "lib.custom_emitters": "emitters"
 
+### Example 1 ###
 extract:
-  - step:
-    action: debug.Breakpoint
+  # Although not used, you must specify a source for any custom emitter using the base class
+  # - step: Download the data via HTTP
+  #   action: extract.source.http.DownloadFiles
+  #   fetch:
+  #     - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.csv"
 
+  # - step:
+  #   action: emitters.CreateRecords
+  #   numrecords: 3
+
+  # - step:
+  #   action: debug.LogValues
+
+### Example 2 ###
+extract:
   - step: Download the data via HTTP
     action: extract.source.http.DownloadFiles
     fetch:
-      - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.csv"
-
-  # - step:
-  #   action: ce.csvReadRecords
+      - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.json"
 
   - step:
-    action: emitters.CreateRecords
-    numrecords: 3
+    action: emitters.jsonReadRecords
+    source: "menu"
 
-  - step:
-    action: debug.LogValues
-
-  # - step:
-  #   action: debug.Breakpoint
-
-  - step: Set schema for output table
+transform:
+  - step: 3. Set schema for output table
     action: transform.schema.SetSchema
     fields:
-      - name: Field 1
-        type: integer
-      - name: Field 2
-        type: integer
-      - name: Field 3
+      - name: station_name
+        type: string
+      - name: available_bikes
         type: integer
 
-  - step: Output to local CSV file
+load:
+  - step: 4. Output to local CSV file
     action: load.OutputCSV
     repository: .
