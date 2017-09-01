@@ -4,53 +4,28 @@ dependencies:
 ### Example 1 ###
 extract:
   # Although not used, you must specify a source for any custom emitter using the base class
-  # - step: Download the data via HTTP
-  #   action: extract.source.http.DownloadFiles
-  #   fetch:
-  #     - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.csv"
-
-  # - step:
-  #   action: emitters.CreateRecords
-  #   numrecords: 3
-
-  # - step:
-  #   action: debug.LogValues
-
-### Example 2 ###
-extract:
   - step: Download the data via HTTP
     action: extract.source.http.DownloadFiles
     fetch:
-      - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.json"
+      - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.csv"
 
   - step:
-    action: debug.Breakpoint
-
-  - step:
-    action: emitters.jsonReadRecords
-    source: "items"
+    action: emitters.CreateRecords
+    numrecords: 3
 
   - step:
     action: debug.LogValues
 
-transform:
-  # - step: 3. Set schema for output table
-  #   action: transform.schema.SetSchema
-  #   fields:
-  #     - name: name
-  #       type: string
-  #     - name: qty
-  #       type: integer
-  #     - name: category
-  #       type: string
-  #     - name: sizes
-  #       type: string
+### Example 2 ###
+# extract:
+#   - step: Download the data via HTTP
+#     action: extract.source.http.DownloadFiles
+#     fetch:
+#       - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.json"
 
-  - step: Infer schema automatically
-    action: transform.schema.DetectSchema
-    num_samples: 10
+#   - step:
+#     action: emitters.jsonReadRecords
+#     source: "stationBeanList"
 
-load:
-  - step: 4. Output to local CSV file
-    action: load.OutputCSV
-    repository: .
+#   - step:
+#     action: debug.LogValues
