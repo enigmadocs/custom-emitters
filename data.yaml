@@ -5,10 +5,10 @@ extract:
   - step:
     action: debug.Breakpoint
 
-  # - step: Download the data via HTTP
-  #   action: extract.source.http.DownloadFiles
-  #   fetch:
-  #     - "https://raw.githubusercontent.com/enigmadocs/excel-dates/master/input.csv"
+  - step: Download the data via HTTP
+    action: extract.source.http.DownloadFiles
+    fetch:
+      - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.csv"
 
   # - step:
   #   action: ce.csvReadRecords
