@@ -1,0 +1,38 @@
+dependencies:
+  "lib.custom_emitters": "emitters"
+
+extract:
+  - step:
+    action: debug.Breakpoint
+
+  # - step: Download the data via HTTP
+  #   action: extract.source.http.DownloadFiles
+  #   fetch:
+  #     - "https://raw.githubusercontent.com/enigmadocs/excel-dates/master/input.csv"
+
+  # - step:
+  #   action: ce.csvReadRecords
+
+  - step:
+    action: emitters.CreateRecords
+    numrecords: 3
+
+  - step:
+    action: debug.LogValues
+
+  # - step:
+  #   action: debug.Breakpoint
+
+  - step: Set schema for output table
+    action: transform.schema.SetSchema
+    fields:
+      - name: Field 1
+        type: integer
+      - name: Field 2
+        type: integer
+      - name: Field 3
+        type: integer
+
+  - step: Output to local CSV file
+    action: load.OutputCSV
+    repository: .

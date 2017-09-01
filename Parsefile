@@ -1,0 +1,16 @@
+###
+# Parsefile for custom-emitters
+# 2017-08-29
+###
+
+name: custom-helloworld
+description: "Demonstrates custom emitters"
+maintainers:
+  - Peter Henderson <name@domain.com>
+version: "1.0.0"
+license: none
+source_urls:
+  - "http://example.org/example.csv"
+
+extract:
+  - data.yaml
