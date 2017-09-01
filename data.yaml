@@ -24,20 +24,31 @@ extract:
       - "https://raw.githubusercontent.com/enigmadocs/custom-emitters/master/input.json"
 
   - step:
+    action: debug.Breakpoint
+
+  - step:
     action: emitters.jsonReadRecords
-    source: "menu"
+    source: "items"
 
   - step:
     action: debug.LogValues
 
 transform:
-  - step: 3. Set schema for output table
-    action: transform.schema.SetSchema
-    fields:
-      - name: station_name
-        type: string
-      - name: available_bikes
-        type: string
+  # - step: 3. Set schema for output table
+  #   action: transform.schema.SetSchema
+  #   fields:
+  #     - name: name
+  #       type: string
+  #     - name: qty
+  #       type: integer
+  #     - name: category
+  #       type: string
+  #     - name: sizes
+  #       type: string
+
+  - step: Infer schema automatically
+    action: transform.schema.DetectSchema
+    num_samples: 10
 
 load:
   - step: 4. Output to local CSV file
